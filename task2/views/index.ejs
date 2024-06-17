@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Form</title>
+    <style>
+        body {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+            background-color: antiquewhite;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            border: 1px solid black;
+            margin: 50px auto 0;
+            padding: 20px 40px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 10px 10px 5px;
+        }
+
+        h1 {
+            position: relative;
+        }
+
+        h1::before {
+            content: "";
+            position: absolute;
+            width: 25%;
+            bottom: 0;
+            border-bottom: 3px solid #4CAF50;
+
+
+        }
+
+        label {
+            display: inline-block;
+            width: 120px;
+            font-size: 20px;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="number"],
+        input[type="password"] {
+            padding: 8px 10px;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+
+        }
+        .error{
+            color: red;
+           margin-left: 120px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <form action="/" method="post" onsubmit="return validateForm()">
+            <h1>Registration</h1>
+            <label for="name">Full Name:</label>
+            <input type="text" id="name" name="name"  required> 
+            <p id="error-name" class="error"></p>
+
+            <label for="name">Username:</label>
+            <input type="text" id="username" name="username" required>
+            <p id="error-username" class="error"></p>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required><br><br>
+
+            <label for="phone">Phone:</label>
+            <input type="number" id="phone" name="phone" required>
+            <p id="error-phone" class="error"></p>
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+            <p id="error-password" class="error"></p>
+
+            <label for="cpassword">Confirm Password:</label>
+            <input type="password" id="cpassword" name="cpassword" required>
+            <p id="error-cpassword" class="error"></p>
+            <button>Submit</button>
+        </form>
+    </div>
+    <script>
+    function validateForm() {
+        // Clear previous error messages
+        document.querySelectorAll('.error').forEach(function (el) {
+            el.innerHTML = '';
+        });
+
+        var name = document.getElementById('name').value;
+        if (name.length < 2) {
+            document.getElementById('error-name').innerHTML = 'Minimum length is 2';
+            return false;
+        }
+
+        var userName = document.getElementById('username').value;
+        if (userName.length < 2) {
+            document.getElementById('error-username').innerHTML = 'Minimum length is 2';
+            return false;
+        }
+
+        var phone = document.getElementById('phone').value;
+        if (phone.length !== 10) {
+            document.getElementById('error-phone').innerHTML = 'Phone number must be 10 digits';
+            return false;
+        }
+
+        var password = document.getElementById('password').value;
+        if (password.length < 6) {
+            document.getElementById('error-password').innerHTML = 'Minimum length is 6';
+            return false;
+        }
+
+        var c_pass = document.getElementById('cpassword').value;
+        if (c_pass === '') {
+            document.getElementById('error-cpassword').innerHTML = 'Please confirm your password';
+            return false;
+        }
+
+        if (password !== c_pass) {
+            document.getElementById('error-cpassword').innerHTML = 'Passwords do not match';
+            return false;
+        }
+    }
+
+
+    </script>
+</body>
+
+</html>
